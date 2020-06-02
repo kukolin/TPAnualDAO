@@ -17,93 +17,76 @@ import edu.usal.negocio.dominio.Cliente;
 import edu.usal.negocio.dominio.Direccion;
 import edu.usal.negocio.dominio.PasajeroFrecuente;
 import edu.usal.negocio.dominio.Pasaporte;
+
 import edu.usal.negocio.dominio.Telefono;
+
 import edu.usal.util.Conexion;
 
 public class ClienteImpl implements ClienteInterfaz{
 
 	Connection con = null;
 	
-//	
-//	public void Conexion() {
-//			
-//	try {
-//		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//	}catch(ClassNotFoundException e){
-//		e.printStackTrace();
-//	}
-//	
-//	try {
-//		con = DriverManager.getConnection(
-//				"jdbc:sqlserver://localhost:1433;databaseName=TPAnual", "sa", "123456");
-//		
-//	}catch(SQLException e){
-//		e.printStackTrace();
-//	}		
-//	
-//	}
-//	
-	
-	
 	
 	@Override
-	public boolean AltaCliente(Cliente cliente) throws SQLException {
+	public boolean AltaCliente(Cliente cliente, int idTelefono) throws SQLException {
 		
 		String nombreApellido = cliente.getNombreyApellido();
 		String dni = cliente.getDni();
 		String CuitCuil = cliente.getCuit_cuil();
 		Date fechaNac = cliente.getFechaNac();
 		String email = cliente.getEmail();
-		Telefono telefono = cliente.getTelefono();
+		
+//		Telefono telefono = cliente.getTelefono();
+		
 		Pasaporte pasaporte = cliente.getPasaporte();
 		PasajeroFrecuente ps = cliente.getPasajeroFrecuente();
 		Direccion direccion = cliente.getDireccion();
 		
-		String Personal = telefono.getPersonal();
-		String Celular = telefono.getCelular();
-		String Laboral = telefono.getLaboral();
+/*		String Personal = telefono.getPersonal();
+//		String Celular = telefono.getCelular();
+//		String Laboral = telefono.getLaboral();
 		
-		String NumeroPas = pasaporte.getNumero();
-		String PaisPas = pasaporte.getPais();
-		String Autoridad = pasaporte.getAutoridad();
-		Date FechaEmision = pasaporte.getFechaEmision();
-		Date FechaVencimiento = pasaporte.getFechaVencimiento();
+//		String NumeroPas = pasaporte.getNumero();
+//		String PaisPas = pasaporte.getPais();
+//		String Autoridad = pasaporte.getAutoridad();
+//		Date FechaEmision = pasaporte.getFechaEmision();
+//		Date FechaVencimiento = pasaporte.getFechaVencimiento();
 		
-		String Alianza = ps.getAlianza();
-		String Aerolinea = ps.getAerolinea();
-		String NumeroFrec = ps.getNumero();
-		String Categoria = ps.getCategoria();
+//		String Alianza = ps.getAlianza();
+//		String Aerolinea = ps.getAerolinea();
+//		String NumeroFrec = ps.getNumero();
+//		String Categoria = ps.getCategoria();
 		
 		String Calle = direccion.getCalle();
 		String Altura = direccion.getAltura();
 		String Ciudad = direccion.getCiudad();
 		String Provincia = direccion.getProvincia();
 		String PaisDir = direccion.getPais();
-		String CodigoPos = direccion.getCodigo();
+		String CodigoPos = direccion.getCodigo(); */
 		
 		
 		con = Conexion.getConnection();
 		
 		Statement stm = con.createStatement();
 
-		String sTelefono = "INSERT INTO Telefono VALUES ('" + Personal + "','" + Celular + "','" + Laboral + "')";
-		String sPasaporte = "INSERT INTO Pasaporte VALUES ('" + NumeroPas + "','" + PaisPas + "','" + Autoridad + "','"+ FechaEmision  + "','"+ FechaVencimiento + "')";
+	//	String sTelefono = "INSERT INTO Telefono VALUES ('" + Personal + "','" + Celular + "','" + Laboral + "')";
+/*		String sPasaporte = "INSERT INTO Pasaporte VALUES ('" + NumeroPas + "','" + PaisPas + "','" + Autoridad + "','"+ FechaEmision  + "','"+ FechaVencimiento + "')";
 		String sPasajero = "INSERT INTO PasajeroFrecuente VALUES ('" + Alianza + "','" + Aerolinea + "','" + NumeroFrec + "','" + Categoria + "')";
 		String sDireccion = "INSERT INTO Direccion VALUES ('" + Calle + "','" + Altura + "','" + Ciudad + "','" + Provincia + "','" + PaisDir +"','"+ CodigoPos + "')";
-
+		*/
 		
 		
-		Statement stmTelefono = con.createStatement();
-		Statement stmPasaporte = con.createStatement();
+//		Statement stmTelefono = con.createStatement();
+/*		Statement stmPasaporte = con.createStatement();
 		Statement stmFrecuente = con.createStatement();
-		Statement stmDireccion = con.createStatement();
+		Statement stmDireccion = con.createStatement();*/
 		
-		ResultSet rsTelefono = stmTelefono.executeQuery("SELECT TOP 1 * FROM Telefono ORDER BY idTelefono DESC");
-		ResultSet rsPasaporte = stmPasaporte.executeQuery("SELECT TOP 1 * FROM Pasaporte ORDER BY idPasaporte DESC");
+//		ResultSet rsTelefono = stmTelefono.executeQuery("SELECT TOP 1 * FROM Telefono ORDER BY idTelefono DESC");
+/*		ResultSet rsPasaporte = stmPasaporte.executeQuery("SELECT TOP 1 * FROM Pasaporte ORDER BY idPasaporte DESC");
 		ResultSet rsFrecuente = stmFrecuente.executeQuery("SELECT TOP 1 * FROM PasajeroFrecuente ORDER BY idPasajeroFrecuente DESC");
 		ResultSet rsDireccion = stmDireccion.executeQuery("SELECT TOP 1 * FROM Direccion ORDER BY idDireccion DESC");
 
-		int idTelefono = 0;
+/*		int idTelefono = 0;
 		
 		while(rsTelefono.next()) {
 			idTelefono = rsTelefono.getInt(1);
@@ -129,24 +112,25 @@ public class ClienteImpl implements ClienteInterfaz{
 		stmDireccion.close();
 		stmFrecuente.close();
 		stmPasaporte.close();
-		stmTelefono.close();
+	//	stmTelefono.close();
 		
-		
+		*/
 		
 		String str = "INSERT INTO Cliente VALUES (";
 		
-		str = str + "'" + nombreApellido + "','" + dni + "'," + idPasaporte +", '" + CuitCuil+ "','" 
-		+ fechaNac + "','" + email + "'," + idTelefono + "," + idFrecuente +", " + idDireccion + ")";
+		str = str + "'" + nombreApellido + "','" + dni + "'," + 1 +", '" + CuitCuil+ "','" 
+		+ fechaNac + "','" + email + "'," + idTelefono + "," + 1 +", " + 1 + ")";
 		
 		
 		
+		/*
 		
-		
-		stm.execute(sTelefono);
+//		stm.execute(sTelefono);
 		stm.execute(sPasajero);
 		stm.execute(sDireccion);
 		stm.execute(sPasaporte);
 
+		*/
 		
 		stm.execute(str);
 		

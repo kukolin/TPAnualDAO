@@ -14,6 +14,7 @@ public class Telefono {
 	public String getPersonal() {
 		return personal;
 	}
+	
 
 	public void setPersonal(String personal) {
 		this.personal = personal;
