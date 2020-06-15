@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import edu.usal.dao.interfaces.LineasAereasInterfaz;
-
 import edu.usal.negocio.dominio.LineasAereas;
 import edu.usal.util.Conexion;
 
@@ -17,7 +17,7 @@ public class LineasAereasImpl implements LineasAereasInterfaz {
 	
 	
 	@Override
-	public ArrayList<String> ListarLineas() throws SQLException {
+	public ArrayList<LineasAereas> ListarLineas() throws SQLException {
 		
 		con = Conexion.getConnection();
 		
@@ -29,16 +29,22 @@ public class LineasAereasImpl implements LineasAereasInterfaz {
 		
 		String resultado = "";
 		
-		ArrayList<String> lista = new ArrayList<String>();
+		ArrayList<LineasAereas> lista = new ArrayList<LineasAereas>();
+		
+		
 		
 		while(rs.next()) {
 
-			resultado = " ID Linea Aerea: " + rs.getInt(1) +
-					", Nombre: " + rs.getString(2).trim() +
-					", Alianza: " + rs.getString(3).trim() +
+			LineasAereas lineasAereas = new LineasAereas(rs.getString(2).trim(), rs.getString(3).trim(), rs.getInt(4));
 			
-			lista.add(resultado);
+	/*		lista.add(rs.getString(2).trim());
+			lista.add(rs.getString(3).trim());
+			lista.add(rs.getInt(4) + "");
+*/
+			lista.add(lineasAereas);
+
 		}
+
 		
 		
 		stm.close();
