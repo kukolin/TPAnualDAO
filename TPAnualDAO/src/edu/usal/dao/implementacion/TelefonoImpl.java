@@ -31,9 +31,11 @@ public class TelefonoImpl implements TelefonoInterfaz{
 		
 		while(rsTelefono.next()) {
 			idTelefono = rsTelefono.getInt(1);
-
 		}
 		
+		rsTelefono.close();
+		stm.close();
+		con.close();
 		return idTelefono;
 		
 	}
@@ -55,7 +57,9 @@ public class TelefonoImpl implements TelefonoInterfaz{
 
 		
 		stm.execute(sTelefono);
+		
 		stm.close();
+		con.close();
 		
 		return true;
 	}

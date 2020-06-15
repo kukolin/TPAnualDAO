@@ -28,7 +28,7 @@ public class ClienteImpl implements ClienteInterfaz{
 	
 	
 	@Override
-	public boolean AltaCliente(Cliente cliente, int idTelefono) throws SQLException {
+	public boolean AltaCliente(Cliente cliente) throws SQLException {
 		
 		String nombreApellido = cliente.getNombreyApellido();
 		String dni = cliente.getDni();
@@ -36,101 +36,25 @@ public class ClienteImpl implements ClienteInterfaz{
 		Date fechaNac = cliente.getFechaNac();
 		String email = cliente.getEmail();
 		
-//		Telefono telefono = cliente.getTelefono();
+		int idTelefono = cliente.getIdTelefono();
+		int idPasaporte = cliente.getIdPasaporte();
+		int idPasajeroFrecuente = cliente.getIdPasajeroFrecuente();
+		int idDireccion = cliente.getIdDireccion();
 		
-		Pasaporte pasaporte = cliente.getPasaporte();
-		PasajeroFrecuente ps = cliente.getPasajeroFrecuente();
-		Direccion direccion = cliente.getDireccion();
-		
-/*		String Personal = telefono.getPersonal();
-//		String Celular = telefono.getCelular();
-//		String Laboral = telefono.getLaboral();
-		
-//		String NumeroPas = pasaporte.getNumero();
-//		String PaisPas = pasaporte.getPais();
-//		String Autoridad = pasaporte.getAutoridad();
-//		Date FechaEmision = pasaporte.getFechaEmision();
-//		Date FechaVencimiento = pasaporte.getFechaVencimiento();
-		
-//		String Alianza = ps.getAlianza();
-//		String Aerolinea = ps.getAerolinea();
-//		String NumeroFrec = ps.getNumero();
-//		String Categoria = ps.getCategoria();
-		
-		String Calle = direccion.getCalle();
-		String Altura = direccion.getAltura();
-		String Ciudad = direccion.getCiudad();
-		String Provincia = direccion.getProvincia();
-		String PaisDir = direccion.getPais();
-		String CodigoPos = direccion.getCodigo(); */
 		
 		
 		con = Conexion.getConnection();
 		
 		Statement stm = con.createStatement();
-
-	//	String sTelefono = "INSERT INTO Telefono VALUES ('" + Personal + "','" + Celular + "','" + Laboral + "')";
-/*		String sPasaporte = "INSERT INTO Pasaporte VALUES ('" + NumeroPas + "','" + PaisPas + "','" + Autoridad + "','"+ FechaEmision  + "','"+ FechaVencimiento + "')";
-		String sPasajero = "INSERT INTO PasajeroFrecuente VALUES ('" + Alianza + "','" + Aerolinea + "','" + NumeroFrec + "','" + Categoria + "')";
-		String sDireccion = "INSERT INTO Direccion VALUES ('" + Calle + "','" + Altura + "','" + Ciudad + "','" + Provincia + "','" + PaisDir +"','"+ CodigoPos + "')";
-		*/
 		
 		
-//		Statement stmTelefono = con.createStatement();
-/*		Statement stmPasaporte = con.createStatement();
-		Statement stmFrecuente = con.createStatement();
-		Statement stmDireccion = con.createStatement();*/
-		
-//		ResultSet rsTelefono = stmTelefono.executeQuery("SELECT TOP 1 * FROM Telefono ORDER BY idTelefono DESC");
-/*		ResultSet rsPasaporte = stmPasaporte.executeQuery("SELECT TOP 1 * FROM Pasaporte ORDER BY idPasaporte DESC");
-		ResultSet rsFrecuente = stmFrecuente.executeQuery("SELECT TOP 1 * FROM PasajeroFrecuente ORDER BY idPasajeroFrecuente DESC");
-		ResultSet rsDireccion = stmDireccion.executeQuery("SELECT TOP 1 * FROM Direccion ORDER BY idDireccion DESC");
-
-/*		int idTelefono = 0;
-		
-		while(rsTelefono.next()) {
-			idTelefono = rsTelefono.getInt(1);
-		}
-		
-		int idPasaporte = 0;
-		
-		while(rsPasaporte.next()) {
-			idPasaporte = rsPasaporte.getInt(1);
-		}
-		
-		int idFrecuente = 0;
-		
-		while(rsFrecuente.next()) {
-			idFrecuente = rsFrecuente.getInt(1);
-		}
-		int idDireccion = 0;
-		
-		while(rsDireccion.next()) {
-			idDireccion = rsDireccion.getInt(1);
-		}
-		
-		stmDireccion.close();
-		stmFrecuente.close();
-		stmPasaporte.close();
-	//	stmTelefono.close();
-		
-		*/
 		
 		String str = "INSERT INTO Cliente VALUES (";
 		
-		str = str + "'" + nombreApellido + "','" + dni + "'," + 1 +", '" + CuitCuil+ "','" 
-		+ fechaNac + "','" + email + "'," + idTelefono + "," + 1 +", " + 1 + ")";
+		str = str + "'" + nombreApellido + "','" + dni + "'," + idPasaporte +", '" + CuitCuil+ "','" 
+		+ fechaNac + "','" + email + "'," + idTelefono + "," + idPasajeroFrecuente +", " + idDireccion + ")";
 		
 		
-		
-		/*
-		
-//		stm.execute(sTelefono);
-		stm.execute(sPasajero);
-		stm.execute(sDireccion);
-		stm.execute(sPasaporte);
-
-		*/
 		
 		stm.execute(str);
 		
@@ -160,7 +84,7 @@ public class ClienteImpl implements ClienteInterfaz{
 	}
 
 	@Override
-	public ArrayList<String> ListarClientes() throws SQLException {
+	public ArrayList<Cliente> ListarClientes() throws SQLException {
 		
 		con = Conexion.getConnection();
 		
@@ -172,8 +96,8 @@ public class ClienteImpl implements ClienteInterfaz{
 		
 		String resultado = "";
 		
-		ArrayList<String> lista = new ArrayList<String>();
-		
+		ArrayList<Cliente> lista = new ArrayList<Cliente>();
+	/*	
 		while(rs.next()) {
 			resultado = resultado +
 					" ID Cliente: " + rs.getInt(1) +
@@ -188,8 +112,16 @@ public class ClienteImpl implements ClienteInterfaz{
 					", ID Direccion: " + rs.getInt(10) + "\n";
 			lista.add(resultado);
 		}
-		
-		
+		*/
+		while(rs.next()) {
+			
+			
+			
+			Cliente cliente = new Cliente(rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(5).trim(), rs.getString(7).trim(), rs.getDate(6), rs.getInt(4), rs.getInt(8), rs.getInt(10), rs.getInt(9));
+								
+			lista.add(cliente);
+			
+		}
 		stm.close();
 		con.close();
 		
@@ -216,7 +148,10 @@ public class ClienteImpl implements ClienteInterfaz{
 		while(rs.next()) {
 			lista.add(rs.getString(2));
 		}
-		
+	
+		rs.close();
+		stm.close();
+		con.close();
 		
 		return lista;
 	}
