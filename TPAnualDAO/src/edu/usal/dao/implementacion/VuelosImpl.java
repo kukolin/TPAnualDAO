@@ -6,9 +6,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import edu.usal.dao.interfaces.VuelosInterfaz;
 import edu.usal.negocio.dominio.Vuelos;
+import edu.usal.util.Conexion;
 
 public class VuelosImpl implements VuelosInterfaz{
 
@@ -36,10 +38,11 @@ public class VuelosImpl implements VuelosInterfaz{
 	
 	
 	@Override
-	public String ListarVuelos() throws SQLException {
+	public ArrayList<Vuelos> ListarVuelos() throws SQLException {
 
 		
-		Conexion();
+//		Conexion();
+		con = Conexion.getConnection();
 		
 		Statement stm = con.createStatement();
 		
@@ -49,26 +52,34 @@ public class VuelosImpl implements VuelosInterfaz{
 		
 		String resultado = "";
 		
-		while(rs.next()) {
-			resultado = resultado +
-					" ID Vuelo: " + rs.getInt(1) +
-					", Numero: " + rs.getString(2).trim() +
-					", Asientos disponibles: " + rs.getInt(3) +
-					", Aeropuerto salida: " + rs.getString(4).trim() +
-					", Aeropuerto llegada: "  + rs.getString(5).trim() +
-					", Fecha salida.: " + rs.getDate(6) +
-					", Fecha llegada: " + rs.getDate(7) +
-					", Tiempo de vuelo: " + rs.getString(8) +
-					", ID Linea Aerea: " + rs.getInt(9) + 
-					"\n";
-		}
+		ArrayList<Vuelos> lista = new ArrayList<Vuelos>();
 		
+//		while(rs.next()) {
+//			resultado = resultado +
+//					" ID Vuelo: " + rs.getInt(1) +
+//					", Numero: " + rs.getString(2).trim() +
+//					", Asientos disponibles: " + rs.getInt(3) +
+//					", Aeropuerto salida: " + rs.getString(4).trim() +
+//					", Aeropuerto llegada: "  + rs.getString(5).trim() +
+//					", Fecha salida.: " + rs.getDate(6) +
+//					", Fecha llegada: " + rs.getDate(7) +
+//					", Tiempo de vuelo: " + rs.getString(8) +
+//					", ID Linea Aerea: " + rs.getInt(9) + 
+//					"\n";
+//		}
+		
+		while(rs.next()) {
+			
+			Vuelos vuelos = new Vuelos(rs.getString(2).trim(), rs.getString(8).trim(), rs.getInt(3), rs.getDate(6), rs.getDate(7), rs.getString(4).trim(), rs.getString(5).trim(), rs.getInt(9), rs.getInt(1));							
+			lista.add(vuelos);
+			
+		}
 		
 		stm.close();
 		con.close();
 		
 		
-		return resultado;
+		return lista;
 		
 	}
 

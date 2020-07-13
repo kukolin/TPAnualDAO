@@ -9,10 +9,12 @@ public class Vuelos {
 	Date fechaSalida, fechaLlegada;
 	String aeroSalida, aeroLlegada;
 	int lineasAereas;
+	int idVuelo;
 	
+
 	
 	public Vuelos(String numero, String tiempo, int cantAsientos, Date fechaSalida, Date fechaLlegada,
-			String aeroSalida, String aeroLlegada, int lineasAereas) {
+			String aeroSalida, String aeroLlegada, int lineasAereas, int idVuelo) {
 		super();
 		this.numero = numero;
 		this.tiempo = tiempo;
@@ -22,9 +24,20 @@ public class Vuelos {
 		this.aeroSalida = aeroSalida;
 		this.aeroLlegada = aeroLlegada;
 		this.lineasAereas = lineasAereas;
+		this.idVuelo = idVuelo;
 	}
-	
-	
+
+
+	public int getIdVuelo() {
+		return idVuelo;
+	}
+
+
+	public void setIdVuelo(int idVuelo) {
+		this.idVuelo = idVuelo;
+	}
+
+
 	public int getLineasAereas() {
 		return lineasAereas;
 	}

@@ -32,12 +32,11 @@ public class VentasImpl implements VentasInterfaz{
 		Date FechaVenta = ventas.getFechaVenta();
 		int idCliente = ventas.getIdCliente();
 		int idVuelo = ventas.getIdVuelo();
-		//int idLinea = ventas.getIdLineaAerea();
 		String Pago = ventas.getFormaDePago();
 
 		Statement stm = con.createStatement();
 		
-		String sql = "INSERT INTO Ventas VALUES (" + idVuelo +"," + idCliente +"," + idVuelo +",'" +FechaVenta+"','"+Pago+"')";
+		String sql = "INSERT INTO Ventas VALUES (" + idVuelo +"," + idCliente +",'" +FechaVenta+"','"+Pago+"')";
 		
 		stm.execute(sql);
 		

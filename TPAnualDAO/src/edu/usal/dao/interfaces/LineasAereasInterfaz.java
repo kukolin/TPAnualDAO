@@ -2,7 +2,6 @@ package edu.usal.dao.interfaces;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import edu.usal.negocio.dominio.LineasAereas;
 

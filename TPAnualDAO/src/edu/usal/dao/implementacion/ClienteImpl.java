@@ -117,7 +117,7 @@ public class ClienteImpl implements ClienteInterfaz{
 			
 			
 			
-			Cliente cliente = new Cliente(rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(5).trim(), rs.getString(7).trim(), rs.getDate(6), rs.getInt(4), rs.getInt(8), rs.getInt(10), rs.getInt(9));
+			Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(5).trim(), rs.getString(7).trim(), rs.getDate(6), rs.getInt(4), rs.getInt(8), rs.getInt(10), rs.getInt(9));
 								
 			lista.add(cliente);
 			

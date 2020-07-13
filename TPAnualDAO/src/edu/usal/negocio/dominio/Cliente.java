@@ -10,11 +10,14 @@ public class Cliente {
 	int idTelefono;
 	int idDireccion;
 	int idPasajeroFrecuente;
+	int idCliente;
+
 	
 	
-	public Cliente(String nombreyApellido, String dni, String cuit_cuil, String email, Date fechaNac, int idPasaporte,
+	public Cliente(int idCliente, String nombreyApellido, String dni, String cuit_cuil, String email, Date fechaNac, int idPasaporte,
 			int idTelefono, int idDireccion, int idPasajeroFrecuente) {
 		super();
+		this.idCliente = idCliente;
 		this.nombreyApellido = nombreyApellido;
 		this.dni = dni;
 		this.cuit_cuil = cuit_cuil;
@@ -26,6 +29,15 @@ public class Cliente {
 		this.idPasajeroFrecuente = idPasajeroFrecuente;
 	}
 
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
 
 	public String getNombreyApellido() {
 		return nombreyApellido;
