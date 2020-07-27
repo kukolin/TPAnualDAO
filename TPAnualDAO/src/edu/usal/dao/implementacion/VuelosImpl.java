@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import edu.usal.dao.interfaces.VuelosInterfaz;
+import edu.usal.negocio.dominio.Cliente;
+import edu.usal.negocio.dominio.LineasAereas;
 import edu.usal.negocio.dominio.Vuelos;
 import edu.usal.util.Conexion;
 
@@ -17,31 +19,10 @@ public class VuelosImpl implements VuelosInterfaz{
 
 	Connection con = null;
 	
-	public void Conexion() {
-			
-	try {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	}catch(ClassNotFoundException e){
-		e.printStackTrace();
-	}
-	
-	try {
-		con = DriverManager.getConnection(
-				"jdbc:sqlserver://localhost:1433;databaseName=TPAnual", "sa", "123456");
-		
-	}catch(SQLException e){
-		e.printStackTrace();
-	}		
-	
-	}
-	
-	
 	
 	@Override
 	public ArrayList<Vuelos> ListarVuelos() throws SQLException {
 
-		
-//		Conexion();
 		con = Conexion.getConnection();
 		
 		Statement stm = con.createStatement();
@@ -54,23 +35,12 @@ public class VuelosImpl implements VuelosInterfaz{
 		
 		ArrayList<Vuelos> lista = new ArrayList<Vuelos>();
 		
-//		while(rs.next()) {
-//			resultado = resultado +
-//					" ID Vuelo: " + rs.getInt(1) +
-//					", Numero: " + rs.getString(2).trim() +
-//					", Asientos disponibles: " + rs.getInt(3) +
-//					", Aeropuerto salida: " + rs.getString(4).trim() +
-//					", Aeropuerto llegada: "  + rs.getString(5).trim() +
-//					", Fecha salida.: " + rs.getDate(6) +
-//					", Fecha llegada: " + rs.getDate(7) +
-//					", Tiempo de vuelo: " + rs.getString(8) +
-//					", ID Linea Aerea: " + rs.getInt(9) + 
-//					"\n";
-//		}
 		
 		while(rs.next()) {
 			
-			Vuelos vuelos = new Vuelos(rs.getString(2).trim(), rs.getString(8).trim(), rs.getInt(3), rs.getDate(6), rs.getDate(7), rs.getString(4).trim(), rs.getString(5).trim(), rs.getInt(9), rs.getInt(1));							
+			LineasAereas lineasAereas = new LineasAereas(0, "", "", 0);
+			
+			Vuelos vuelos = new Vuelos(rs.getString(2).trim(), rs.getString(8).trim(), rs.getInt(3), rs.getDate(6), rs.getDate(7), rs.getString(4).trim(), rs.getString(5).trim(), lineasAereas);							
 			lista.add(vuelos);
 			
 		}
@@ -86,7 +56,7 @@ public class VuelosImpl implements VuelosInterfaz{
 	@Override
 	public boolean BajaVuelos(int i) throws SQLException {
 	
-		Conexion();
+		con = Conexion.getConnection();
 		
 		
 		Statement stm = con.createStatement();
@@ -102,7 +72,7 @@ public class VuelosImpl implements VuelosInterfaz{
 	}
 
 	@Override
-	public boolean AltaVuelos(Vuelos vuelos) throws SQLException {
+	public boolean AltaVuelos(Vuelos vuelos, LineasAereas lineasAereas) throws SQLException {
 		
 		
 		String aeropuertoSalida = vuelos.getAeroLlegada();
@@ -114,13 +84,11 @@ public class VuelosImpl implements VuelosInterfaz{
 		Date fechaSalida = vuelos.getFechaSalida();
 		Date fechaLlegada = vuelos.getFechaLlegada();
 		
-		int idLinea = vuelos.getLineasAereas();
 		
-
-		Conexion();
+		con = Conexion.getConnection();
 		
 		String sVuelos = "INSERT INTO Vuelos VALUES ('" + numero + "', " + cantidad + ", '" + aeropuertoSalida + "', '" + aeropuertoLlegada
-				 + "', '" + fechaSalida + "', '" +fechaLlegada + "', '" +tiempo  + "', " + idLinea + ")";
+				 + "', '" + fechaSalida + "', '" +fechaLlegada + "', '" +tiempo  + "', " + lineasAereas.getIdLinea() + ")";
 				
 		
 		Statement stm = con.createStatement();
@@ -130,6 +98,43 @@ public class VuelosImpl implements VuelosInterfaz{
 	
 		
 		return true;
+	}
+	
+	@Override
+	public boolean ModificarVuelo(int idVuelo, Vuelos vuelos, LineasAereas lineasAereas) throws SQLException {
+
+		String aeropuertoSalida = vuelos.getAeroLlegada();
+		String aeropuertoLlegada = vuelos.getAeroSalida();
+		
+		String numero = vuelos.getNumero();
+		String tiempo = vuelos.getTiempo();
+		int cantidad = vuelos.getCantAsientos();
+		Date fechaSalida = vuelos.getFechaSalida();
+		Date fechaLlegada = vuelos.getFechaLlegada();
+		
+		con = Conexion.getConnection();
+		
+		Statement stm = con.createStatement();
+		
+		String updateVuelo = "UPDATE Vuelos SET Numero = '" + numero + 
+				"', CantAsientos = '" + cantidad +
+				"', AeropuertoSalida = '" + aeropuertoSalida + 
+				"', AeropuertoLlegada = '" + aeropuertoLlegada +
+				"', FechaSalida = '" + fechaSalida +
+				"', FechaLegada = '" + fechaLlegada +
+				"', TiempoVuelo = '" + tiempo +
+				"', idLineaAerea = '" + lineasAereas.getIdLinea() +				
+				
+				"' WHERE idVuelo = " + idVuelo;
+		
+		stm.execute(updateVuelo);
+		
+		stm.close();
+		
+		
+		con.close();
+		return true;
+		
 	}
 
 }

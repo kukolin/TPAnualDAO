@@ -43,20 +43,23 @@ public class Principal {
 	static LineasAereasInterfaz lineasAereasInterfaz;
 	static VuelosInterfaz vuelosInterfaz;
 	public static void main (String args[]) throws SQLException, IOException {
-				
+	
 		
 		lineasAereasInterfaz = LineasAereasFactory.GetImplementation("MSSQL");
 		vuelosInterfaz = VuelosFactory.GetImplementation("MSSQL");
 		
-	//	Vuelos vuelos = new Vuelos(0, "", "", 0, null, null, "", "", 0);
-		ArrayList<Vuelos> alArrayList = vuelosInterfaz.ListarVuelos();
+//		Vuelos vuelos = new Vuelos("123", "2 horas", 300, new Date(123456789), new Date(1234567891), "EZE", "MDQ", 12, 3);
+		
+//		vuelosInterfaz.BajaVuelos(8);
+		
+	//<Vuelos> alArrayList = vuelosInterfaz.ListarVuelos();
 
 
-		for(int i=0; i<alArrayList.size();i++) {
+	//	for(int i=0; i<alArrayList.size();i++) {
 		
-		System.out.println(alArrayList.get(i).getNumero());
+	//	System.out.println(alArrayList.get(i).getNumero());
 		
-	}
+//	}
 		
 		
 //		LineasAereas linea = new LineasAereas("Nombre", "Alianza", 5);
@@ -70,51 +73,51 @@ public class Principal {
 //		}
 		
 		
-//		//-----------------------------------------------------------------
+		//-----------------------------------------------------------------
 //		
 //		pasaporteInterfaz = PasaporteFactory.GetImplementation("MSSQL");
-//		
-//		Date date = new Date(123123123);
+//
+		Date date = new Date(123123123);
 //		
 //		
 //		Pasaporte pasaporte = new Pasaporte("a", "b", "c", date, date);
 //		
-//
-//		//-----------------------------------------------------------------
-//
+
+		//-----------------------------------------------------------------
+
 //		pFrecuenteInterfaz = PasajeroFrecuenteFactory.GetImplementation("MSSQL");
 //		
 //		PasajeroFrecuente psFrecuente = new PasajeroFrecuente("a", "a", "b", "b");
-//		
-//		//-----------------------------------------------------------------
-//
-//		cliInter = ClienteFactory.GetImplementation("MSSQL");
-//		
-//	//	Cliente cliente = new Cliente("", "", "", "", date, 3, 1, 2, 3);
-//		
-//		
+		
+		//-----------------------------------------------------------------
+
+		cliInter = ClienteFactory.GetImplementation("MSSQL");
+		
+//		Cliente cliente = new Cliente(0, "ave", "123456", "111", "111", date, 3, 1, 2, 3);
+		
+		
 //		ArrayList<String> asd = cliInter.ListarPaises();
 //		
 //		for (String i : asd) {
 //			
 //		if(i != null) System.out.println(i.toString());}
-//		
-//		//-----------------------------------------------------------------
-//
-//		
-//		telInter = 	TelefonoFactory.GetImplementation("MSSQL");
-//			
+		
+		//-----------------------------------------------------------------
+
+		
+		telInter = 	TelefonoFactory.GetImplementation("MSSQL");
+			
 //		Telefono telefono = new Telefono("a", "b", "c");
-//	
-//		//-----------------------------------------------------------------
-//
-//		direccionInterfaz  = DireccionFactory.GetImplementation("MSSQL");
-//		
+	
+		//-----------------------------------------------------------------
+
+		direccionInterfaz  = DireccionFactory.GetImplementation("MSSQL");
+		
 //		Direccion direccion = new Direccion("c", "d", "d", "d", "d", "d");
-//		
-//		//-----------------------------------------------------------------
-//
-//		
+		
+		//-----------------------------------------------------------------
+
+		
 //		telInter.AltaTelefono(telefono);
 //		int telefonoID = telInter.getTelefono();
 //		System.out.println(telefonoID);
@@ -127,17 +130,16 @@ public class Principal {
 //
 //		int idDireccion = direccionInterfaz.AltaDireccion(direccion);
 //		System.out.println(idDireccion);
-//		
+		
 //		cliente.setIdDireccion(idDireccion);
 //		cliente.setIdPasajeroFrecuente(pfID);
 //		cliente.setIdPasaporte(pasaporteID);
 //		cliente.setIdTelefono(telefonoID);
-//		
-//		System.out.println(cliInter.AltaCliente(cliente));
-//			
-//			
-		}
+		
+		
+ //		System.out.println(cliInter.ModificarCliente(265, cliente));
 			
 			
+}
 }
 	

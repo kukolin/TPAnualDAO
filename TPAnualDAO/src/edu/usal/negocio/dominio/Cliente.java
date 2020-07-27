@@ -6,134 +6,92 @@ public class Cliente {
 
 	String nombreyApellido, dni, cuit_cuil, email;
 	Date fechaNac;
-	int idPasaporte;
-	int idTelefono;
-	int idDireccion;
-	int idPasajeroFrecuente;
+//	int idPasaporte;
+//	int idTelefono;
+//	int idDireccion;
+//	int idPasajeroFrecuente;
 	int idCliente;
 
+	Pasaporte pasaporte;
+	Telefono telefono;
+	Direccion direccion;
+	PasajeroFrecuente pasajeroFrecuente;
 	
-	
-	public Cliente(int idCliente, String nombreyApellido, String dni, String cuit_cuil, String email, Date fechaNac, int idPasaporte,
-			int idTelefono, int idDireccion, int idPasajeroFrecuente) {
+	public Cliente( int idCliente, String nombreyApellido, String dni, String cuit_cuil, String email, Date fechaNac,
+			Pasaporte pasaporte, Telefono telefono, Direccion direccion, PasajeroFrecuente pasajeroFrecuente) {
 		super();
-		this.idCliente = idCliente;
 		this.nombreyApellido = nombreyApellido;
 		this.dni = dni;
 		this.cuit_cuil = cuit_cuil;
 		this.email = email;
 		this.fechaNac = fechaNac;
-		this.idPasaporte = idPasaporte;
-		this.idTelefono = idTelefono;
-		this.idDireccion = idDireccion;
-		this.idPasajeroFrecuente = idPasajeroFrecuente;
-	}
-
-
-	public int getIdCliente() {
-		return idCliente;
-	}
-
-
-	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
+		this.pasaporte = pasaporte;
+		this.telefono = telefono; 
+		this.direccion = direccion;
+		this.pasajeroFrecuente = pasajeroFrecuente;
 	}
-
 	public String getNombreyApellido() {
 		return nombreyApellido;
 	}
-
-
 	public void setNombreyApellido(String nombreyApellido) {
 		this.nombreyApellido = nombreyApellido;
 	}
-
-
 	public String getDni() {
 		return dni;
 	}
-
-
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-
-
 	public String getCuit_cuil() {
 		return cuit_cuil;
 	}
-
-
 	public void setCuit_cuil(String cuit_cuil) {
 		this.cuit_cuil = cuit_cuil;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	public Date getFechaNac() {
 		return fechaNac;
 	}
-
-
 	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
 	}
-
-
-	public int getIdPasaporte() {
-		return idPasaporte;
+	public int getIdCliente() {
+		return idCliente;
 	}
-
-
-	public void setIdPasaporte(int idPasaporte) {
-		this.idPasaporte = idPasaporte;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-
-
-	public int getIdTelefono() {
-		return idTelefono;
+	public Pasaporte getPasaporte() {
+		return pasaporte;
 	}
-
-
-	public void setIdTelefono(int idTelefono) {
-		this.idTelefono = idTelefono;
+	public void setPasaporte(Pasaporte pasaporte) {
+		this.pasaporte = pasaporte;
 	}
-
-
-	public int getIdDireccion() {
-		return idDireccion;
+	public Telefono getTelefono() {
+		return telefono;
 	}
-
-
-	public void setIdDireccion(int idDireccion) {
-		this.idDireccion = idDireccion;
+	public void setTelefono(Telefono telefono) {
+		this.telefono = telefono;
 	}
-
-
-	public int getIdPasajeroFrecuente() {
-		return idPasajeroFrecuente;
+	public Direccion getDireccion() {
+		return direccion;
 	}
-
-	public void setIdPasajeroFrecuente(int idPasajeroFrecuente) {
-		this.idPasajeroFrecuente = idPasajeroFrecuente;
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+	public PasajeroFrecuente getPasajeroFrecuente() {
+		return pasajeroFrecuente;
+	}
+	public void setPasajeroFrecuente(PasajeroFrecuente pasajeroFrecuente) {
+		this.pasajeroFrecuente = pasajeroFrecuente;
 	}
 	
-	public String getInfo() {
-		
-		String string = "Nombre: " + this.nombreyApellido + ", DNI: " + this.dni + ", Cuit/Cuil: "  + this.cuit_cuil + ", email: "+ this.email +
-				", Fecha Nac.: "+ this.getFechaNac() + ".";
-
-		return string;
-		
-	}
+ 
 	
 }

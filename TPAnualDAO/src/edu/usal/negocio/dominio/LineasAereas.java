@@ -4,14 +4,24 @@ public class LineasAereas {
 
 	String nombre, alianza;
 	int vuelos;
+	int idLinea;
 	
-	public LineasAereas(String nombre, String alianza, int vuelos) {
+	public LineasAereas( int idLinea, String nombre, String alianza, int vuelos) {
 		super();
 		this.nombre = nombre;
 		this.alianza = alianza;
 		this.vuelos = vuelos;
+		this.idLinea = idLinea;
 	}
-	
+
+	public int getIdLinea() {
+		return idLinea;
+	}
+
+	public void setIdLinea(int idLinea) {
+		this.idLinea = idLinea;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

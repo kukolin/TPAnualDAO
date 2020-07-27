@@ -1,6 +1,7 @@
 package edu.usal.dao.implementacion;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import edu.usal.dao.interfaces.LineasAereasInterfaz;
+import edu.usal.negocio.dominio.Cliente;
 import edu.usal.negocio.dominio.LineasAereas;
 import edu.usal.util.Conexion;
 
@@ -35,12 +37,8 @@ public class LineasAereasImpl implements LineasAereasInterfaz {
 		
 		while(rs.next()) {
 
-			LineasAereas lineasAereas = new LineasAereas(rs.getString(2).trim(), rs.getString(3).trim(), rs.getInt(4));
+			LineasAereas lineasAereas = new LineasAereas(rs.getInt(1), rs.getString(2).trim(), rs.getString(3).trim(), rs.getInt(4));
 			
-	/*		lista.add(rs.getString(2).trim());
-			lista.add(rs.getString(3).trim());
-			lista.add(rs.getInt(4) + "");
-*/
 			lista.add(lineasAereas);
 
 		}
@@ -96,7 +94,32 @@ public class LineasAereasImpl implements LineasAereasInterfaz {
 
 	}
 	
-	
+	@Override
+	public boolean ModificarLineas(int idLinea, LineasAereas lineas) throws SQLException {
+
+		String nombre = lineas.getNombre();
+		String alianza = lineas.getAlianza();
+		int vuelosAsignados = lineas.getVuelos();
+
+
+		con = Conexion.getConnection();
+		
+		Statement stm = con.createStatement();
+		
+		String updateLineaString = "UPDATE LineasAereas SET Nombre = '" + nombre + 
+				"', Alianza = '" + alianza +
+				"', VuelosAsignados = '" + vuelosAsignados + 
+				"' WHERE idLineaAerea = " + idLinea;
+		
+		stm.execute(updateLineaString);
+		
+		stm.close();
+		
+		
+		con.close();
+		return true;
+		
+	}
 	
 	
 	

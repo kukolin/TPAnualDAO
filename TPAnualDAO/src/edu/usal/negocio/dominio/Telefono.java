@@ -3,12 +3,22 @@ package edu.usal.negocio.dominio;
 public class Telefono {
 
 	String personal, celular, laboral;
+	int idTelefono;
 
-	public Telefono(String personal, String celular, String laboral) {
+	public Telefono(int idTelefono, String personal, String celular, String laboral) {
 		super();
 		this.personal = personal;
 		this.celular = celular;
 		this.laboral = laboral;
+		this.idTelefono = idTelefono;
+	}
+	
+	public int getIdTelefono() {
+		return idTelefono;
+	}
+
+	public void setIdTelefono(int idTelefono) {
+		this.idTelefono = idTelefono;
 	}
 
 	public String getPersonal() {

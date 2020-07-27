@@ -3,35 +3,31 @@ package edu.usal.negocio.dominio;
 import java.sql.Date;
 
 public class Ventas {
-
-	int idCliente, idVuelo, idLineaAerea;
+	
+	Cliente cliente;
+	Vuelos vuelos;
+	
 	Date fechaVenta;
 	String formaDePago;
-	public Ventas(int idCliente, int idVuelo, int idLineaAerea, Date fechaVenta, String formaDePago) {
+	
+	public Ventas(Cliente cliente, Vuelos vuelos, Date fechaVenta, String formaDePago) {
 		super();
-		this.idCliente = idCliente;
-		this.idVuelo = idVuelo;
-		this.idLineaAerea = idLineaAerea;
+		this.cliente = cliente;
+		this.vuelos = vuelos;
 		this.fechaVenta = fechaVenta;
 		this.formaDePago = formaDePago;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
-	public int getIdVuelo() {
-		return idVuelo;
+	public Vuelos getVuelos() {
+		return vuelos;
 	}
-	public void setIdVuelo(int idVuelo) {
-		this.idVuelo = idVuelo;
-	}
-	public int getIdLineaAerea() {
-		return idLineaAerea;
-	}
-	public void setIdLineaAerea(int idLineaAerea) {
-		this.idLineaAerea = idLineaAerea;
+	public void setVuelos(Vuelos vuelos) {
+		this.vuelos = vuelos;
 	}
 	public Date getFechaVenta() {
 		return fechaVenta;
@@ -45,7 +41,8 @@ public class Ventas {
 	public void setFormaDePago(String formaDePago) {
 		this.formaDePago = formaDePago;
 	}
-
+	
+	
 	
 	
 }

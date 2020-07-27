@@ -28,7 +28,8 @@ public class ClienteImpl implements ClienteInterfaz{
 	
 	
 	@Override
-	public boolean AltaCliente(Cliente cliente) throws SQLException {
+	public boolean AltaCliente(Cliente cliente, Telefono telefono,
+			Pasaporte pasaporte, PasajeroFrecuente pasajeroFrecuente, Direccion direccion) throws SQLException {
 		
 		String nombreApellido = cliente.getNombreyApellido();
 		String dni = cliente.getDni();
@@ -36,10 +37,15 @@ public class ClienteImpl implements ClienteInterfaz{
 		Date fechaNac = cliente.getFechaNac();
 		String email = cliente.getEmail();
 		
-		int idTelefono = cliente.getIdTelefono();
-		int idPasaporte = cliente.getIdPasaporte();
-		int idPasajeroFrecuente = cliente.getIdPasajeroFrecuente();
-		int idDireccion = cliente.getIdDireccion();
+//		int idTelefono = cliente.getIdTelefono();
+//		int idPasaporte = cliente.getIdPasaporte();
+//		int idPasajeroFrecuente = cliente.getIdPasajeroFrecuente();
+//		int idDireccion = cliente.getIdDireccion();
+		
+		int idTelefono = telefono.getIdTelefono();
+		int idPasaporte = pasaporte.getIdPasaporte();
+		int idPasajeroFrecuente = pasajeroFrecuente.getIdPasajeroFrecuente();
+		int idDireccion = direccion.getIdDireccion();
 		
 		
 		
@@ -83,6 +89,10 @@ public class ClienteImpl implements ClienteInterfaz{
 		return true;
 	}
 
+	
+	
+	
+	
 	@Override
 	public ArrayList<Cliente> ListarClientes() throws SQLException {
 		
@@ -93,9 +103,7 @@ public class ClienteImpl implements ClienteInterfaz{
 		String sql = "SELECT * FROM Cliente";
 		
 		ResultSet rs = stm.executeQuery(sql);
-		
-		String resultado = "";
-		
+				
 		ArrayList<Cliente> lista = new ArrayList<Cliente>();
 	/*	
 		while(rs.next()) {
@@ -115,9 +123,13 @@ public class ClienteImpl implements ClienteInterfaz{
 		*/
 		while(rs.next()) {
 			
+			PasajeroFrecuente pasajeroFrecuente = new PasajeroFrecuente(0, "", "", "", "");
+			Telefono telefono = new Telefono(0, "", "", "");
+			Pasaporte pasaporte = new Pasaporte(0, "", "", "", new Date(1), new Date(1));
+			Direccion direccion = new Direccion(0, "", "", "", "", "", "");
 			
-			
-			Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(5).trim(), rs.getString(7).trim(), rs.getDate(6), rs.getInt(4), rs.getInt(8), rs.getInt(10), rs.getInt(9));
+			Cliente cliente = new Cliente(rs.getInt(1), rs.getString(2).trim(), rs.getString(3).trim(), rs.getString(5).trim(),
+					rs.getString(7).trim(), rs.getDate(6), pasaporte, telefono, direccion, pasajeroFrecuente);
 								
 			lista.add(cliente);
 			
@@ -173,5 +185,40 @@ public class ClienteImpl implements ClienteInterfaz{
 		}
 			br.close();
 			return prov;		
+	}
+
+	@Override
+	public boolean ModificarCliente(int idCliente, Cliente cliente) throws SQLException {
+
+		String nombreApellido = cliente.getNombreyApellido();
+		String dni = cliente.getDni();
+		String CuitCuil = cliente.getCuit_cuil();
+		Date fechaNac = cliente.getFechaNac();
+		String email = cliente.getEmail();
+		
+//		int idTelefono = cliente.getIdTelefono();
+//		int idPasaporte = cliente.getIdPasaporte();
+//		int idPasajeroFrecuente = cliente.getIdPasajeroFrecuente();
+//		int idDireccion = cliente.getIdDireccion();
+		
+		con = Conexion.getConnection();
+		
+		Statement stm = con.createStatement();
+		
+		String updateCliente = "UPDATE Cliente SET NombreApellido = '" + nombreApellido + 
+				"', DNI = '" + dni +
+				"', CuitCuil = '" + CuitCuil + 
+				"', FechaNac = '" + fechaNac +
+				"', Email = '" + email +
+				"' WHERE idCliente = " + idCliente;
+		
+		stm.execute(updateCliente);
+		
+		stm.close();
+		
+		
+		con.close();
+		return true;
+		
 	}
 }

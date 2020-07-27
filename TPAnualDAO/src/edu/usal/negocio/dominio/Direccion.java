@@ -3,8 +3,9 @@ package edu.usal.negocio.dominio;
 public class Direccion {
 
 	String calle, altura, ciudad, provincia, pais, codigo;
+	int idDireccion;
 
-	public Direccion(String calle, String altura, String ciudad, String provincia, String pais, String codigo) {
+	public Direccion(int idDireccion, String calle, String altura, String ciudad, String provincia, String pais, String codigo) {
 		super();
 		this.calle = calle;
 		this.altura = altura;
@@ -12,6 +13,15 @@ public class Direccion {
 		this.provincia = provincia;
 		this.pais = pais;
 		this.codigo = codigo;
+		this.idDireccion = idDireccion;
+	}
+
+	public int getIdDireccion() {
+		return idDireccion;
+	}
+
+	public void setIdDireccion(int idDireccion) {
+		this.idDireccion = idDireccion;
 	}
 
 	public String getCalle() {

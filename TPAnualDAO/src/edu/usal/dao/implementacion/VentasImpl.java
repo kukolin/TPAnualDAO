@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import edu.usal.dao.interfaces.VentasInterfaz;
+import edu.usal.negocio.dominio.Cliente;
 import edu.usal.negocio.dominio.Ventas;
+import edu.usal.negocio.dominio.Vuelos;
 import edu.usal.util.Conexion;
 
 public class VentasImpl implements VentasInterfaz{
@@ -25,13 +27,13 @@ public class VentasImpl implements VentasInterfaz{
 	}
 
 	@Override
-	public boolean AltaVentas(Ventas ventas) throws SQLException {
+	public boolean AltaVentas(Ventas ventas, Vuelos vuelos, Cliente cliente ) throws SQLException {
 		
 		con = Conexion.getConnection();
 		
 		Date FechaVenta = ventas.getFechaVenta();
-		int idCliente = ventas.getIdCliente();
-		int idVuelo = ventas.getIdVuelo();
+		int idCliente = cliente.getIdCliente();
+		int idVuelo = vuelos.getIdVuelo();
 		String Pago = ventas.getFormaDePago();
 
 		Statement stm = con.createStatement();
